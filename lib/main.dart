@@ -18,6 +18,96 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+class registoDeAvaliacao extends StatefulWidget{
+  const registoDeAvaliacao({super.key});
+
+  @override
+  State<registoDeAvaliacao> createState() => _registoDeAvaliacao();
+}
+
+class _registoDeAvaliacao extends State<registoDeAvaliacao> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children:[
+            buildText('Nome da Disciplina'),
+            Container(height: 14,),
+            buildText('Tipo de Avaliação'),
+            Container(height: 14,),
+            buildText('Data e hora da realização'),
+            Container(height: 14,),
+            buildText('Nivel de dificuldade esperado pelo aluno'),
+            Container(height: 14,),
+            buildText('Observações'),
+            Container(height: 26,),
+            Button(text: 'Submit',
+                width: 200,
+                height: 50,
+                onPressed:
+                    (symbol) => print('A avaliação foi registada com sucesso.'))
+          ],
+        ),
+      ),
+    );
+  }
+  Widget buildText(String text) => TextField(
+
+    decoration: InputDecoration(
+      labelText: text,
+      border: OutlineInputBorder(),
+    ),
+    keyboardType: TextInputType.name,
+    textInputAction: TextInputAction.done,
+  );
+}
+
+class listagemDeAvaliacoes extends StatefulWidget{
+  const listagemDeAvaliacoes({super.key});
+
+  @override
+  State<listagemDeAvaliacoes> createState() => _listagemDeAvaliacoes();
+}
+
+class _listagemDeAvaliacoes extends State<listagemDeAvaliacoes> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children:[
+            buildText('Nome da Disciplina'),
+            Container(height: 14,),
+            buildText('Tipo de Avaliação'),
+            Container(height: 14,),
+            buildText('Data e hora da realização'),
+            Container(height: 14,),
+            buildText('Nivel de dificuldade esperado pelo aluno'),
+            Container(height: 14,),
+            buildText('Observações'),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget buildText(String text) => TextField(
+
+    decoration: InputDecoration(
+      labelText: text,
+      border: OutlineInputBorder(),
+    ),
+    keyboardType: TextInputType.name,
+    textInputAction: TextInputAction.done,
+  );
+}
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({super.key});
@@ -30,21 +120,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Dashboard',
-      style: optionStyle,
-    ),
-    Text(
-      'Listagem de avaliações',
-      style: optionStyle,
-    ),
-    Text(
-      'Registo de avaliações',
-      style: optionStyle,
-    ),
-  ];
-
+  List tabs = [null, null, registoDeAvaliacao()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -54,11 +130,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      body: tabs[_selectedIndex],
       appBar: AppBar(
         title: const Text('BottomNavigationBar Sample'),
-      ),
-      body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -82,15 +156,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
   }
 
-  Widget buildText(String text) => TextField(
 
-    decoration: InputDecoration(
-      labelText: text,
-      border: OutlineInputBorder(),
-    ),
-    keyboardType: TextInputType.name,
-    textInputAction: TextInputAction.done,
-  );
 }
 
 
